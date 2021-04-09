@@ -1,0 +1,16 @@
+name: CI
+on: [push, pull_request]
+
+jobs:
+  hello-world:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: npm config set '//npm.pkg.github.com/:_authToken=${{ secrets.NPM_AUTH_TOKEN}}' && yarn
+      - name: Lint code
+        run: yarn lint
+      - name: Test code
+        run: yarn test

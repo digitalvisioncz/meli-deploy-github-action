@@ -1,0 +1,31 @@
+name: 'Meli Static Deploy Github Action'
+description: 'Deploy site build to Meli static sites hosting or remove from Meli on branch delete'
+author: 'Digital Vision CZ <software@digitalvision.cz>'
+
+inputs:
+  action:
+    description: 'Meli action type [release,remove]'
+    required: true
+  meliUrl:
+    description: 'Meli base url'
+    required: true
+  meliSiteId:
+    description: 'Meli site id'
+    required: true
+  meliSiteToken:
+    description: 'Meli site token'
+    required: false
+  meliApiToken:
+    description: 'Meli API token'
+    required: false
+  meliSiteRelease:
+    description: 'Meli site release name'
+    required: false
+  buildFolder:
+    description: 'Build folder (relative path from root, ie. dist)'
+    default: 'dist'
+    required: false
+
+runs:
+  using: 'node12'
+  main: 'dist/index.js'

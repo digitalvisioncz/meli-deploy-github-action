@@ -1,0 +1,30 @@
+{
+  "name": "meli-static-deploy-github-action",
+  "version": "0.0.2",
+  "main": "dist/index.js",
+  "author": "Milan Zítka <milan@littlewall.cz>",
+  "license": "ISC",
+  "scripts": {
+    "build": "ncc build src/main.js -o dist",
+    "lint": "eslint . --fix",
+    "test": "jest",
+    "bump": "npm version"
+  },
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0",
+    "axios": "^0.21.1",
+    "form-data": "^4.0.0",
+    "tar": "^6.1.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@digitalvisioncz/eslint-config-base": "^1.0.1",
+    "@zeit/ncc": "^0.22.3",
+    "dotenv": "^8.2.0",
+    "husky": "^6.0.0",
+    "jest": "^26.6.3",
+    "jest-mock-axios": "^4.3.0",
+    "lint-staged": "^10.5.4"
+  }
+}

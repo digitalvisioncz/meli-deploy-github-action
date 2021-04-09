@@ -1,0 +1,10 @@
+{
+  "env": {
+    "node": true,
+    "jest": true
+  },
+  "extends": [
+    "@digitalvisioncz/eslint-config-base"
+  ],
+  "rules": {}
+}
