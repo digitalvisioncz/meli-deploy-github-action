@@ -1,0 +1,20 @@
+name: Delete branch from Meli
+on:
+  # run action on feature branch delete
+  pull_request:
+    types: [closed]
+  delete:
+    branches:
+      - feature/*
+
+jobs:
+  delete-preview-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete branch from Meli (branch/PR preview)  # name your branch removing step
+        uses: digitalvisioncz/meli-deploy-github-action@1.0.0-beta # use this Github action
+        with:
+          action: remove # set Meli action
+          meliUrl: https://meli.dvdev.cz # set Meli base URL
+          meliSiteId: ${{ secrets.MELI_SITE_ID }}  # set Meli site ID (use env or secrets)
+          meliApiToken: ${{ secrets.MELI_API_TOKEN }}  # set Meli API token (use env or secrets)

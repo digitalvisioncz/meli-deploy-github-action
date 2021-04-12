@@ -1,9 +1,13 @@
 {
-  "name": "meli-static-deploy-github-action",
-  "version": "0.0.2",
+  "name": "meli-deploy-github-action",
+  "version": "1.0.0-beta",
   "main": "dist/index.js",
-  "author": "Milan Zítka <milan@littlewall.cz>",
-  "license": "ISC",
+  "author": {
+    "name": "Digital Vision CZ",
+    "email": "software@digitalvision.cz",
+    "url": "https://digitalvision.cz"
+  },
+  "license": "MIT",
   "scripts": {
     "build": "ncc build src/main.js -o dist",
     "lint": "eslint . --fix",

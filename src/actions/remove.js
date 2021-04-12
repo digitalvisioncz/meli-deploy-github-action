@@ -11,14 +11,15 @@ const remove = async ({meliSiteId, branchName}) => {
             return;
         }
 
-        const {_id: branchId} = branches.find(branch => branch.name === branchName);
+        const meliBranch = branches.find(branch => branch.name === branchName);
 
-        if (!branchId) {
+        if (!meliBranch || !meliBranch._id) {
             core.warning('Branch not found! Nothing to delete.');
 
             return;
         }
 
+        const branchId = meliBranch._id;
         const {items: releases} = await api.get(`/sites/${meliSiteId}/releases`);
 
         if (!Array.isArray(releases)) {
@@ -29,13 +30,11 @@ const remove = async ({meliSiteId, branchName}) => {
 
         const releasesToDelete = releases.filter(({branches: releaseBranches}) => releaseBranches.includes(branchId));
 
-        core.info(`Deleting releases in branch ${branchName}`);
+        core.info(`Deleting releases in branch: ${branchName}`);
 
-        releasesToDelete.map(async ({_id: releaseId}) => {
-            await api.delete(`/sites/${meliSiteId}/release/${releaseId}`);
-        });
+        releasesToDelete.map(({_id: releaseId}) => api.delete(`/releases/${releaseId}`));
 
-        core.info(`Deleting branch ${branchName}`);
+        core.info(`Deleting branch: ${branchName}`);
 
         await api.delete(`/sites/${meliSiteId}/branches/${branchId}`);
     } catch (err) {

@@ -1,0 +1,39 @@
+name: Deploy preview on pull request
+on:
+  # run action when PR to main branch is opened/reopened or synchronize (pushed new commit to PR)
+  pull_request:
+    types: [opened,synchronize,reopened]
+    branches:
+     - main
+
+jobs:
+  # ... other jobs (ie linting, testing,..)
+  -deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: c-hive/gha-yarn-cache@v1
+      - name: Install dependencies
+        run: yarn
+      - name: Build static files
+        run: yarn build
+
+      - name: Deploy static site preview # name your deploy step
+        uses: digitalvisioncz/meli-deploy-github-action@1.0.0-beta # use this Github action
+        id: meli # set step ID (optional, but reuired if you want to use action's outputs)
+        with:
+          action: release # set Meli action
+          meliUrl: https://meli.dvdev.cz # set Meli base URL
+          meliSiteId: ${{ secrets.MELI_SITE_ID }} # set Meli site ID (use env or secrets)
+          meliSiteToken: ${{ secrets.MELI_SITE_TOKEN }} # set Meli site token (use env or secrets)
+          buildFolder: out # set yout build folder (from root of your repository)
+
+      # you can use output "meliDeployUrl" on your next steps, for example add comment to pull request (when opened)
+      - name: 'Comment PR'
+        uses: actions/github-script@0.3.0
+        if: github.event_name == 'pull_request' && github.event.action == 'opened'
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const {issue: {number: issue_number}, repo: {owner, repo}} = context;
+            github.issues.createComment({issue_number, owner, repo, body: 'Deployed to ${{steps.meli.outputs.meliDeployUrl}} 👋'});
