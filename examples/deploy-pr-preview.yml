@@ -8,7 +8,7 @@ on:
 
 jobs:
   # ... other jobs (ie linting, testing,..)
-  -deploy:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -19,7 +19,7 @@ jobs:
         run: yarn build
 
       - name: Deploy static site preview # name your deploy step
-        uses: digitalvisioncz/meli-deploy-github-action@1.0.0-beta # use this Github action
+        uses: digitalvisioncz/meli-deploy-github-action@1.0.0-beta.2 # use this Github action
         id: meli # set step ID (optional, but reuired if you want to use action's outputs)
         with:
           action: release # set Meli action

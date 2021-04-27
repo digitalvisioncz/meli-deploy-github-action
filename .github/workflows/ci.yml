@@ -12,5 +12,3 @@ jobs:
         run: npm config set '//npm.pkg.github.com/:_authToken=${{ secrets.NPM_AUTH_TOKEN}}' && yarn
       - name: Lint code
         run: yarn lint
-      - name: Test code
-        run: yarn test

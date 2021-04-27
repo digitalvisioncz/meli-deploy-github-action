@@ -1,6 +1,6 @@
 {
   "name": "meli-deploy-github-action",
-  "version": "1.0.0-beta",
+  "version": "1.0.0-beta.2",
   "main": "dist/index.js",
   "author": {
     "name": "Digital Vision CZ",

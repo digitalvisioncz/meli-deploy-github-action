@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete branch from Meli (branch/PR preview)  # name your branch removing step
-        uses: digitalvisioncz/meli-deploy-github-action@1.0.0-beta # use this Github action
+        uses: digitalvisioncz/meli-deploy-github-action@1.0.0-beta.2 # use this GitHub action
         with:
           action: remove # set Meli action
           meliUrl: https://meli.dvdev.cz # set Meli base URL

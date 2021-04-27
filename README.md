@@ -66,7 +66,7 @@ URL of deployed release.
 ## Example usage
 ```yml
 - name: Deploy static site preview
-  uses: digitalvisioncz/meli-deploy-github-action@1.0.0-beta
+  uses: digitalvisioncz/meli-deploy-github-action@1.0.0-beta.2
   id: meli
   with:
     action: release
